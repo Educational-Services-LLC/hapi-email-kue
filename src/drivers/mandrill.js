@@ -22,7 +22,7 @@ module.exports = function(options) {
                         from_email : typeof emailObject.from === 'string' ? emailObject.from : emailObject.from.email,
                         from_name  : emailObject.from.name,
                         to         : driver._formatTo(emailObject.to, reject),
-                        headers : {
+                        headers    : {
                             'reply-to' : typeof emailObject.from === 'string' ? emailObject.from : emailObject.from.email
                         },
                         global_merge_vars : _.map(emailObject.templateVars, function(value, key) {

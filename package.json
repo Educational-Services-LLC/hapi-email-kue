@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "kue": "^0.10.5"
+    "kue": "^0.10.5",
+    "lodash": "^4.0.1",
+    "mandrill-api": "^1.0.45"
   },
   "devDependencies": {},
   "scripts": {
