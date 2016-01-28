@@ -1,0 +1,23 @@
+{
+  "name": "hapi-email-kue",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "kue": "^0.10.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spruce-bruce/hapi-email-kue.git"
+  },
+  "author": "Aaron Bruce <aaron@synapsestudios.com> (synapsestudios.com)",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/spruce-bruce/hapi-email-kue/issues"
+  },
+  "homepage": "https://github.com/spruce-bruce/hapi-email-kue#readme"
+}
