@@ -8,7 +8,10 @@
     "lodash": "^4.0.1",
     "mandrill-api": "^1.0.45"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint-config-hapi": "^8.0.1",
+    "eslint-plugin-hapi": "^4.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
