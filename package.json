@@ -1,7 +1,7 @@
 {
   "name": "hapi-email-kue",
   "version": "0.0.1",
-  "description": "",
+  "description": "Hapi plugin for sending emails using a redis queue.",
   "main": "index.js",
   "dependencies": {
     "kue": "^0.10.5",
