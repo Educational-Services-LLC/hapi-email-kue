@@ -37,7 +37,8 @@ module.exports = function (options) {
                         headers    : {
                             'reply-to' : typeof emailObject.from === 'string' ? emailObject.from : emailObject.from.email
                         },
-                        global_merge_vars : _.map(emailObject.templateVars, (value, key) => ({ name : key, content : value }))
+                        global_merge_vars : _.map(emailObject.templateVars, (value, key) => ({ name : key, content : value })),
+                        attachments : emailObject.attachments
                     }
                 };
 
