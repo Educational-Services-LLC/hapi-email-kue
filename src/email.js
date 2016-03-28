@@ -1,45 +1,60 @@
-var kue = require('kue');
+'use strict';
 
-module.exports = function(options) {
-    var queue     = kue.createQueue(options.kueConfig);
-    var queueName = 'email';
+const Kue = require('kue');
+
+module.exports = function (options) {
+
+    const queue     = Kue.createQueue(options.kueConfig);
+    const queueName = 'email';
 
     return {
-        enqueue : function(title, emailObject) {
-            return new Promise(function(resolve, reject) {
+        enqueue : function (title, emailObject) {
+
+            return new Promise((resolve, reject) => {
+
                 queue.create(queueName, {
                     title       : title,
                     emailObject : emailObject
                 })
                 .removeOnComplete(true)
-                .save(function (err) {
-                    if (err) reject(err);
+                .save((err) => {
+
+                    if (err) {
+                        reject(err);
+                    }
                     resolve();
                 });
             });
         },
 
-        process : function() {
+        process : function () {
+
             console.log('Starting email queue processor.');
 
-            var synapseEmail = this;
-            queue.process(queueName, function(job, done) {
-                synapseEmail.send(job.data.emailObject)
-                    .then(function () {
+            queue.process(queueName, (job, done) => {
+
+                this.send(job.data.emailObject)
+                    .then(() => {
+
                         console.log('Successfully sent email job id ' + job.id);
                         done();
-                    }, function(err) {
+                    }, (err) => {
+
                         console.log('Failed to send email with job id ' + job.id);
+                        console.log(err);
                         done(new Error(err));
-                    }).catch(function(err) {
+                    }).catch((err) => {
+
                         console.log('Failed to send email with job id ' + job.id);
+                        console.log(err.message);
                         done(err);
                     });
             });
         },
 
-        send : function(emailObject) {
-            var driver = new require('./drivers/' + options.driver)(options.driverConfig);
+        send: function (emailObject) {
+
+            const driver = require('./drivers/' + options.driver)(options.driverConfig);
             return driver.send(emailObject);
         }
     };
