@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/spruce-bruce/hapi-email-kue.git"
+    "url": "git+https://github.com/synapsestudios/hapi-email-kue.git"
   },
   "author": "Aaron Bruce <aaron@synapsestudios.com> (synapsestudios.com)",
   "license": "BSD-3-Clause",
