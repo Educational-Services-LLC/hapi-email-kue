@@ -4,8 +4,13 @@ const Kue = require('kue');
 
 module.exports = function (options) {
 
-    const queue     = Kue.createQueue(options.kueConfig);
+    let queue;
     const queueName = 'email';
+
+    queue = Kue.createQueue(options.kueConfig);
+    queue.on('error', function (err) {
+        console.error(err);
+    });
 
     return {
         enqueue : function (title, emailObject) {
