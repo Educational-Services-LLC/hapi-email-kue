@@ -79,9 +79,6 @@ module.exports = function (options) {
                     html: emailObject.html || ''
                 };
 
-
-
-
                 if (emailObject.attachments) {
                     if (!Array.isArray(emailObject.attachments)) {
                         return reject('attachments must be an array');
