@@ -3,6 +3,14 @@
 const _ = require('lodash');
 const Mailgun = require('mailgun-js');
 
+function whitelistRecipients(to, reject) {
+   if (Array.isArray(to)) {
+        return to.map(recipient => checkWhitelist(recipient, reject)).join(',');
+    } else {
+        return checkWhitelist(to, reject)
+    }
+}
+
 module.exports = function (options) {
 
     const mailgunClient = Mailgun({
@@ -35,9 +43,20 @@ module.exports = function (options) {
         send : (emailObject) => {
 
             return new Promise((resolve, reject) => {
+                let to = emailObject.to;
 
-                if (!emailObject.to) {
+                if (!to) {
                     return reject('no to address provided');
+                } else {
+                    to = whitelistRecipients(emailObject.to, reject);
+                }
+
+                if (emailObject.bcc) {
+                    mail.bcc = whitelistRecipients(emailObject.bcc, reject);
+                }
+
+                if (emailObject.cc) {
+                    mail.cc = whitelistRecipients(emailObject.cc, reject);
                 }
 
                 if (!emailObject.from) {
@@ -54,11 +73,14 @@ module.exports = function (options) {
 
                 const mail = {
                     from: emailObject.from,
-                    to: checkWhitelist(emailObject.to, reject),
+                    to: to,
                     subject: emailObject.subject,
                     body: emailObject.text || '',
                     html: emailObject.html || ''
                 };
+
+
+
 
                 if (emailObject.attachments) {
                     if (!Array.isArray(emailObject.attachments)) {
