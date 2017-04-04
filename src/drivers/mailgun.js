@@ -3,14 +3,6 @@
 const _ = require('lodash');
 const Mailgun = require('mailgun-js');
 
-function whitelistRecipients(to, reject) {
-   if (Array.isArray(to)) {
-        return to.map(recipient => checkWhitelist(recipient, reject)).join(',');
-    } else {
-        return checkWhitelist(to, reject)
-    }
-}
-
 module.exports = function (options) {
 
     const mailgunClient = Mailgun({
@@ -36,6 +28,14 @@ module.exports = function (options) {
         }
         else {
             return options.trap;
+        }
+    };
+
+    const whitelistRecipients = (to, reject) => {
+        if (Array.isArray(to)) {
+            return to.map(recipient => checkWhitelist(recipient, reject)).join(',');
+        } else {
+            return checkWhitelist(to, reject)
         }
     };
 
