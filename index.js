@@ -2,6 +2,8 @@
 
 const SynapseEmail = require('./src/email');
 
+exports.name = 'hapi-email-kue';
+
 exports.register = function (server, options, next) {
 
     server.expose(new SynapseEmail(options));
